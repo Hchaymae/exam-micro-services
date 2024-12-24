@@ -1,0 +1,37 @@
+type Query {
+    findAllOrders: [OrderResponse]
+    findOrderById(id: Int!): OrderResponse
+}
+
+type Mutation {
+    createOrder(request: OrderRequestInput!): Int
+}
+
+input OrderRequestInput {
+    customerId: Int!
+    products: [PurchaseRequestInput!]!
+    amount: Float!
+    paymentMethod: String!
+    reference: String!
+}
+
+input PurchaseRequestInput {
+    productId: Int!
+    quantity: Int!
+}
+
+type OrderResponse {
+    id: Int
+    customerId: Int
+    products: [OrderLineResponse]
+    amount: Float
+    paymentMethod: String
+    reference: String
+}
+
+type OrderLineResponse {
+    id: Int
+    orderId: Int
+    productId: Int
+    quantity: Int
+}
